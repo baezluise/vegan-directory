@@ -1,0 +1,94 @@
+/* RESET RELAJADO */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  background: #f7f3ed;
+  color: #2f2a26;
+}
+
+/* HEADER */
+header {
+  background: #6fbf8e;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  border-bottom-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+}
+
+header p {
+  margin-top: 0.6rem;
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+/* CONTENEDOR */
+main {
+  max-width: 1100px;
+  margin: -40px auto 0;
+  padding: 1.5rem;
+}
+
+/* SECCIONES */
+section {
+  margin-bottom: 2rem;
+}
+
+section h2 {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+/* MAPA (NO TOCAR FLEX) */
+#map {
+  height: 320px;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #e7efe9;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* LISTA */
+#business-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.2rem;
+  list-style: none;
+  padding: 0;
+}
+
+/* TARJETAS */
+.business {
+  background: #fff;
+  border-radius: 20px;
+  padding: 1.2rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+.business:hover {
+  transform: translateY(-6px) rotate(-0.3deg);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.16);
+}
+
+.business h3 {
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+  font-size: 1.1rem;
+}
+
+.business p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #5c534a;
+}

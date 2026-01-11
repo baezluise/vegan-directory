@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Directorio de Emprendimientos Veganos</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  </head>
+  <body>
+    <header>
+      <h1>🌱 Directorio Vegano</h1>
+      <p>Explora emprendimientos veganos locales</p>
+    </header>
+
+    <main>
+      <!-- Sección del mapa -->
+      <section id="map-section">
+        <h2>Mapa de ubicaciones</h2>
+        <!-- Este div será donde el mapa se mostraría -->
+        <div id="map-placeholder">
+          <!-- Placeholder para mapa -->
+        <div id="map" style="height: 300px;"></div>
+      </section>
+
+      <!-- Sección del listado -->
+      <section id="list-section">
+        <h2>Emprendimientos</h2>
+        <ul id="business-list">
+          <!-- Los emprendimientos se inyectarán con JavaScript -->
+        </ul>
+      </section>
+    </main>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
