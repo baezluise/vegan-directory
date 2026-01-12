@@ -30,6 +30,25 @@
           <!-- Los emprendimientos se inyectarán con JavaScript -->
         </ul>
       </section>
+      <!-- Botón -->
+      <section id="add-section">
+  <h2>Agregar nuevo lugar</h2>
+
+  <input id="name" placeholder="Nombre" />
+  <textarea id="description" placeholder="Descripción"></textarea>
+
+  <select id="category">
+    <option value="emprendimientos">Emprendimiento / Restaurante</option>
+    <option value="eventos">Evento cultural</option>
+    <option value="servicios">Servicio</option>
+  </select>
+
+  <input id="lat" placeholder="Latitud" />
+  <input id="lng" placeholder="Longitud" />
+
+  <button id="addBtn">Agregar</button>
+</section>
+
     </main>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script type="module" src="js/main.js"></script>
