@@ -2,18 +2,24 @@
 const businesses = [
   {
     name: "La Huerta Verde",
-    description: "Café y comida vegana saludable.",
-    location: { lat: 6.2442, lng: -75.5812 },
+    description: "Café y comida vegana saludable",
+    lat: 4.7105,
+    lng: -74.0703,
+    category: "emprendimientos",
   },
   {
-    name: "Veggie Delights",
-    description: "Repostería vegana artesanal.",
-    location: { lat: 6.2518, lng: -75.5636 },
+    name: "Feria Vegana Bogotá",
+    description: "Evento cultural mensual",
+    lat: 4.72,
+    lng: -74.065,
+    category: "eventos",
   },
   {
-    name: "Verde Urbano",
-    description: "Comidas rápidas veg-friendly.",
-    location: { lat: 6.2272, lng: -75.5736 },
+    name: "Nutricionista Vegana",
+    description: "Asesorías personalizadas",
+    lat: 4.705,
+    lng: -74.075,
+    category: "servicios",
   },
 ];
 
@@ -22,23 +28,35 @@ console.log("Map div:", document.getElementById("map"));
 
 // ---------------- MAPA ----------------
 function initializeMap(businesses) {
-  const map = L.map("map").setView([6.2442, -75.5812], 13);
+  const map = L.map("map").setView([4.711, -74.0721], 12);
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: "© OpenStreetMap contributors",
+    attribution: "© OpenStreetMap",
   }).addTo(map);
 
-  businesses.forEach((business) => {
-    const marker = L.marker([business.location.lat, business.location.lng]).addTo(map);
+  // Capas por categoría
+  const layers = {
+    emprendimientos: L.layerGroup().addTo(map),
+    eventos: L.layerGroup().addTo(map),
+    servicios: L.layerGroup().addTo(map),
+  };
 
-    marker.bindPopup(`
-      <strong>${business.name}</strong><br>
-      ${business.description}
-    `);
+  businesses.forEach((item) => {
+    if (!layers[item.category]) return;
+
+    L.marker([item.lat, item.lng])
+      .bindPopup(`<strong>${item.name}</strong><br>${item.description}`)
+      .addTo(layers[item.category]);
   });
-  setTimeout(() => {
-    map.invalidateSize();
-  }, 0);
+
+  // Control para activar/desactivar categorías
+  L.control
+    .layers(null, {
+      Emprendimientos: layers.emprendimientos,
+      "Eventos culturales": layers.eventos,
+      Servicios: layers.servicios,
+    })
+    .addTo(map);
 }
 
 // ---------------- LISTA ----------------
