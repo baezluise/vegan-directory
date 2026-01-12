@@ -1,28 +1,3 @@
-// Datos de ejemplo: un array de emprendimientos veganos
-const businesses = [
-  {
-    name: "La Huerta Verde",
-    description: "Café y comida vegana saludable",
-    lat: 4.7105,
-    lng: -74.0703,
-    category: "emprendimientos",
-  },
-  {
-    name: "Feria Vegana Bogotá",
-    description: "Evento cultural mensual",
-    lat: 4.72,
-    lng: -74.065,
-    category: "eventos",
-  },
-  {
-    name: "Nutricionista Vegana",
-    description: "Asesorías personalizadas",
-    lat: 4.705,
-    lng: -74.075,
-    category: "servicios",
-  },
-];
-
 console.log("Leaflet:", L);
 console.log("Map div:", document.getElementById("map"));
 
