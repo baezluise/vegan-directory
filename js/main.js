@@ -1,7 +1,24 @@
-console.log("Leaflet:", L);
-console.log("Map div:", document.getElementById("map"));
+// ---------- FIREBASE ----------
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  addDoc,
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-// ---------------- MAPA ----------------
+// Configuración Firebase
+const firebaseConfig = {
+  apiKey: "TU_API_KEY",
+  authDomain: "TU_PROJECT.firebaseapp.com",
+  projectId: "TU_PROJECT_ID",
+};
+
+// Inicializar Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// ---------- MAPA ----------
 function initializeMap(businesses) {
   const map = L.map("map").setView([4.711, -74.0721], 12);
 
@@ -9,7 +26,6 @@ function initializeMap(businesses) {
     attribution: "© OpenStreetMap",
   }).addTo(map);
 
-  // Capas por categoría
   const layers = {
     emprendimientos: L.layerGroup().addTo(map),
     eventos: L.layerGroup().addTo(map),
@@ -24,7 +40,6 @@ function initializeMap(businesses) {
       .addTo(layers[item.category]);
   });
 
-  // Control para activar/desactivar categorías
   L.control
     .layers(null, {
       Emprendimientos: layers.emprendimientos,
@@ -34,27 +49,33 @@ function initializeMap(businesses) {
     .addTo(map);
 }
 
-// ---------------- LISTA ----------------
-function renderBusinessList() {
+// ---------- LISTA ----------
+function renderBusinessList(businesses) {
   const listEl = document.getElementById("business-list");
+  listEl.innerHTML = "";
 
-  businesses.forEach((business) => {
-    const item = document.createElement("li");
-    item.className = "business";
-
-    item.innerHTML = `
-      <h3>${business.name}</h3>
-      <p>${business.description}</p>
-    `;
-
-    listEl.appendChild(item);
+  businesses.forEach((b) => {
+    const li = document.createElement("li");
+    li.innerHTML = `<strong>${b.name}</strong><br>${b.description}`;
+    listEl.appendChild(li);
   });
 }
 
-// ---------------- INIT ----------------
-function initPage() {
-  renderBusinessList();
+// ---------- FIRESTORE ----------
+async function loadBusinesses() {
+  const snapshot = await getDocs(collection(db, "businesses"));
+  return snapshot.docs.map((doc) => doc.data());
+}
+
+async function saveBusiness(item) {
+  await addDoc(collection(db, "businesses"), item);
+}
+
+// ---------- INIT ----------
+async function initPage() {
+  const businesses = await loadBusinesses();
+  renderBusinessList(businesses);
   initializeMap(businesses);
 }
 
-initPage();
+document.addEventListener("DOMContentLoaded", initPage);
